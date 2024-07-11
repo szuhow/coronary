@@ -9,8 +9,10 @@ import tensorflow as tf
 from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, UpSampling2D, concatenate
 from tensorflow.keras.models import Model
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
+from tensorflow.keras.callbacks import CSVLogger
 
 tf.config.set_visible_devices([], 'GPU')  # Disable GPU
+csv_logger = CSVLogger('training_log.csv', append=True, separator=';')
 
 # Load JSON data
 with open('seg_train/annotations/seg_train.json', 'r') as file:
@@ -171,7 +173,7 @@ if __name__ == '__main__':
         model = unet_model()
         model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy', iou])
 
-        history = model.fit(dataset, epochs=args.epochs, steps_per_epoch=args.steps // batch_size)
+        history = model.fit(dataset, epochs=args.epochs, steps_per_epoch=args.steps // batch_size, callbacks=[csv_logger])
         
         model.save(f'models/unet_model_{args.epochs}_epochs_{args.steps}_steps.h5')
         print("Model saved successfully.")
