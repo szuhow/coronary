@@ -4,16 +4,16 @@ import torch
 from pathlib import Path
 from PIL import Image
 from torchvision import transforms
-from unet.unet import UNet
+from unet import UNet
 
 def find_model_file(model_dir, epoch):
-    model_files = list(Path(model_dir).glob(f'final_model_epochs_{epoch}_*.pth'))
+    model_files = list(Path(model_dir).glob(f'best_model_epoch_{epoch}_*.pth'))
     if not model_files:
         raise FileNotFoundError(f"No model file found for epoch {epoch} in directory {model_dir}")
     return model_files[0]
 
 def load_model(model_path):
-    model = UNet(n_class=1)  # Zastąp UNet odpowiednią klasą modelu
+    model = UNet(n_channels=1, n_classes=1, bilinear=False)  # Zastąp UNet odpowiednią klasą modelu
     checkpoint = torch.load(model_path, weights_only=True)
     model.load_state_dict(checkpoint['model_state_dict'])
     model.eval()

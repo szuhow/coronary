@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/rafalszulinski/Desktop/developing/IVES/coronary/coronary-experiments/mlruns/763321475793972337/be4fe64f2011429cba4c9581606b7d5f/artifacts
+end_time: 1739792700563
+entry_point_name: ''
+experiment_id: '763321475793972337'
+lifecycle_stage: active
+run_id: be4fe64f2011429cba4c9581606b7d5f
+run_name: run-2025-02-17-124450
+run_uuid: be4fe64f2011429cba4c9581606b7d5f
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1739792691035
+status: 4
+tags: []
+user_id: rafalszulinski
